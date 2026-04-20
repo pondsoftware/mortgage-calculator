@@ -56,13 +56,20 @@ export default function RootLayout({
       </Script>
       <body className="min-h-full flex flex-col font-sans bg-gray-50 text-gray-900">
         <header className="bg-sky-600 text-white">
-          <div className="max-w-5xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <a href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white hover:text-sky-100 transition">
               <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
               </svg>
-              Mortgage Calculator
+              Lending Calculator
             </a>
+            <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <a href="/amortization-schedule" className="text-sky-100 hover:text-white transition">Amortization</a>
+              <a href="/refinance" className="text-sky-100 hover:text-white transition">Refinance</a>
+              <a href="/affordability" className="text-sky-100 hover:text-white transition">Affordability</a>
+              <a href="/rent-vs-buy" className="text-sky-100 hover:text-white transition">Rent vs Buy</a>
+              <a href="/extra-payments" className="text-sky-100 hover:text-white transition">Extra Payments</a>
+            </nav>
           </div>
         </header>
         <main className="flex-1">{children}</main>

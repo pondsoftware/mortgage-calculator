@@ -49,6 +49,68 @@ export default function Home() {
         <MortgageCalculator />
       </div>
 
+      {/* Related Calculators Navigation */}
+      <section className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">More Mortgage Calculators</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <a
+            href="/amortization-schedule"
+            className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition"
+          >
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">
+              Amortization Schedule
+            </h3>
+            <p className="text-sm text-gray-600">
+              Generate a full month-by-month breakdown of principal, interest, and remaining balance.
+            </p>
+          </a>
+          <a
+            href="/refinance"
+            className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition"
+          >
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">
+              Refinance Calculator
+            </h3>
+            <p className="text-sm text-gray-600">
+              Compare current vs refinance terms. See monthly savings and break-even point.
+            </p>
+          </a>
+          <a
+            href="/affordability"
+            className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition"
+          >
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">
+              Home Affordability
+            </h3>
+            <p className="text-sm text-gray-600">
+              Find out how much house you can afford based on income, debts, and the 28/36 DTI rules.
+            </p>
+          </a>
+          <a
+            href="/rent-vs-buy"
+            className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition"
+          >
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">
+              Rent vs Buy
+            </h3>
+            <p className="text-sm text-gray-600">
+              Compare total cost of renting vs buying over time with appreciation and equity.
+            </p>
+          </a>
+          <a
+            href="/extra-payments"
+            className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition"
+          >
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">
+              Extra Payments
+            </h3>
+            <p className="text-sm text-gray-600">
+              See how additional monthly or annual payments reduce your loan term and total interest.
+            </p>
+          </a>
+        </div>
+      </section>
+
       {/* Educational Content */}
       <section className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">How Is a Mortgage Payment Calculated?</h2>
