@@ -12,6 +12,20 @@ export const metadata: Metadata = {
   title: "Mortgage Calculator — Monthly Payment, Amortization & Extra Payments",
   description:
     "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+  openGraph: {
+    title: "Mortgage Calculator",
+    description:
+      "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+    type: "website",
+    url: "https://lendingcalculator.net",
+    siteName: "Mortgage Calculator",
+  },
+  twitter: {
+    card: "summary",
+    title: "Mortgage Calculator",
+    description:
+      "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+  },
 };
 
 export default function RootLayout({
