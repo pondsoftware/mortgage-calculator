@@ -170,7 +170,7 @@ export default function MortgageCalculator() {
                 type="number"
                 value={homePrice}
                 onChange={(e) => setHomePrice(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                 min={0}
                 step={10000}
               />
@@ -186,7 +186,7 @@ export default function MortgageCalculator() {
                 type="number"
                 value={downPayment}
                 onChange={(e) => setDownPayment(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                 min={0}
                 step={5000}
               />
@@ -201,7 +201,7 @@ export default function MortgageCalculator() {
                 type="number"
                 value={rate}
                 onChange={(e) => setRate(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 px-4 pr-12 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full rounded-lg border border-gray-300 px-4 pr-12 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                 min={0}
                 max={20}
                 step={0.125}
@@ -216,7 +216,7 @@ export default function MortgageCalculator() {
             <select
               value={termYears}
               onChange={(e) => setTermYears(Number(e.target.value))}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none bg-white"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none bg-white"
             >
               <option value={30}>30 years</option>
               <option value={20}>20 years</option>
@@ -234,7 +234,7 @@ export default function MortgageCalculator() {
                 type="number"
                 value={annualPropertyTax}
                 onChange={(e) => setAnnualPropertyTax(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                 min={0}
                 step={100}
               />
@@ -250,7 +250,7 @@ export default function MortgageCalculator() {
                 type="number"
                 value={annualInsurance}
                 onChange={(e) => setAnnualInsurance(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                 min={0}
                 step={100}
               />
@@ -268,7 +268,7 @@ export default function MortgageCalculator() {
                 type="number"
                 value={extraMonthly}
                 onChange={(e) => setExtraMonthly(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                 min={0}
                 step={50}
               />
@@ -284,7 +284,7 @@ export default function MortgageCalculator() {
                   type="number"
                   value={pmiRate}
                   onChange={(e) => setPmiRate(Number(e.target.value))}
-                  className="w-full rounded-lg border border-gray-300 px-4 pr-12 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  className="w-full rounded-lg border border-gray-300 px-4 pr-12 py-3 text-lg focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
                   min={0}
                   max={3}
                   step={0.05}
@@ -297,11 +297,11 @@ export default function MortgageCalculator() {
       </div>
 
       {/* Key Result */}
-      <div className="bg-blue-600 rounded-xl p-6 text-white text-center">
-        <p className="text-blue-100 text-sm mb-1">Total Monthly Payment (PITI)</p>
+      <div className="bg-sky-600 rounded-xl p-6 text-white text-center">
+        <p className="text-sky-100 text-sm mb-1">Total Monthly Payment (PITI)</p>
         <p className="text-5xl font-bold">${fmt(Math.round(totalMonthlyPITI))}</p>
         {extraMonthly > 0 && (
-          <p className="text-blue-200 text-sm mt-1">
+          <p className="text-sky-200 text-sm mt-1">
             + ${fmt(extraMonthly)} extra = ${fmt(Math.round(totalMonthlyPITI + extraMonthly))}/mo
           </p>
         )}
@@ -385,8 +385,8 @@ export default function MortgageCalculator() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* 15-Year Card */}
-          <div className="border border-blue-200 bg-blue-50 rounded-lg p-5">
-            <h4 className="font-semibold text-blue-900 text-lg mb-3">15-Year Fixed</h4>
+          <div className="border border-sky-200 bg-sky-50 rounded-lg p-5">
+            <h4 className="font-semibold text-sky-900 text-lg mb-3">15-Year Fixed</h4>
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-gray-600 text-sm">Monthly P&amp;I</span>
@@ -466,7 +466,7 @@ export default function MortgageCalculator() {
                     <td className="py-1.5 px-3 text-right text-green-700">${fmt(Math.round(row.principal))}</td>
                     <td className="py-1.5 px-3 text-right text-red-600">${fmt(Math.round(row.interest))}</td>
                     {extraMonthly > 0 && (
-                      <td className="py-1.5 px-3 text-right text-blue-600">${fmt(Math.round(row.extraPayment))}</td>
+                      <td className="py-1.5 px-3 text-right text-sky-600">${fmt(Math.round(row.extraPayment))}</td>
                     )}
                     <td className="py-1.5 px-3 text-right font-mono">${fmt(Math.round(row.balance))}</td>
                   </tr>
