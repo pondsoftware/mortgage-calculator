@@ -70,17 +70,51 @@ function calculateAmortization(
   return rows;
 }
 
+function calculateMonthlyPI(
+  loanAmount: number,
+  annualRate: number,
+  termYears: number
+): number {
+  const monthlyRate = annualRate / 100 / 12;
+  const totalPayments = termYears * 12;
+  if (monthlyRate <= 0) return loanAmount / totalPayments;
+  return (
+    (loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, totalPayments))) /
+    (Math.pow(1 + monthlyRate, totalPayments) - 1)
+  );
+}
+
+function calculateTotalInterest(
+  loanAmount: number,
+  annualRate: number,
+  termYears: number
+): number {
+  const monthlyPayment = calculateMonthlyPI(loanAmount, annualRate, termYears);
+  const totalPayments = termYears * 12;
+  return monthlyPayment * totalPayments - loanAmount;
+}
+
 export default function MortgageCalculator() {
   const [homePrice, setHomePrice] = useState(350000);
   const [downPayment, setDownPayment] = useState(70000);
   const [rate, setRate] = useState(6.5);
   const [termYears, setTermYears] = useState(30);
   const [extraMonthly, setExtraMonthly] = useState(0);
+  const [annualPropertyTax, setAnnualPropertyTax] = useState(3600);
+  const [annualInsurance, setAnnualInsurance] = useState(1200);
+  const [pmiRate, setPmiRate] = useState(0.75);
   const [showSchedule, setShowSchedule] = useState(false);
 
   const loanAmount = homePrice - downPayment;
   const downPaymentPercent =
     homePrice > 0 ? ((downPayment / homePrice) * 100).toFixed(1) : "0";
+  const downPaymentPercentNum = homePrice > 0 ? (downPayment / homePrice) * 100 : 0;
+
+  // PITI calculations
+  const monthlyPropertyTax = annualPropertyTax / 12;
+  const monthlyInsurance = annualInsurance / 12;
+  const hasPMI = downPaymentPercentNum < 20;
+  const monthlyPMI = hasPMI ? (loanAmount * (pmiRate / 100)) / 12 : 0;
 
   const schedule = useMemo(
     () => calculateAmortization(loanAmount, rate, termYears, extraMonthly),
@@ -93,6 +127,7 @@ export default function MortgageCalculator() {
   );
 
   const monthlyPayment = schedule[0]?.payment || 0;
+  const totalMonthlyPITI = monthlyPayment + monthlyPropertyTax + monthlyInsurance + monthlyPMI;
   const totalInterest = schedule[schedule.length - 1]?.totalInterest || 0;
   const totalInterestNoExtra =
     scheduleNoExtra[scheduleNoExtra.length - 1]?.totalInterest || 0;
@@ -110,6 +145,15 @@ export default function MortgageCalculator() {
     totalPaid > 0 ? ((loanAmount / totalPaid) * 100).toFixed(0) : "0";
   const interestPercent =
     totalPaid > 0 ? ((totalInterest / totalPaid) * 100).toFixed(0) : "0";
+
+  // 15yr vs 30yr comparison
+  const monthlyPI15 = calculateMonthlyPI(loanAmount, rate, 15);
+  const monthlyPI30 = calculateMonthlyPI(loanAmount, rate, 30);
+  const totalInterest15 = calculateTotalInterest(loanAmount, rate, 15);
+  const totalInterest30 = calculateTotalInterest(loanAmount, rate, 30);
+  const totalCost15 = loanAmount + totalInterest15;
+  const totalCost30 = loanAmount + totalInterest30;
+  const interestSavedWith15 = totalInterest30 - totalInterest15;
 
   return (
     <div className="space-y-8">
@@ -180,34 +224,119 @@ export default function MortgageCalculator() {
               <option value={10}>10 years</option>
             </select>
           </div>
-        </div>
-        <div className="mt-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Extra Monthly Payment (optional)
-          </label>
-          <div className="relative max-w-xs">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
-            <input
-              type="number"
-              value={extraMonthly}
-              onChange={(e) => setExtraMonthly(Number(e.target.value))}
-              className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
-              min={0}
-              step={50}
-            />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Annual Property Tax
+            </label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+              <input
+                type="number"
+                value={annualPropertyTax}
+                onChange={(e) => setAnnualPropertyTax(Number(e.target.value))}
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                min={0}
+                step={100}
+              />
+            </div>
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Annual Homeowners Insurance
+            </label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+              <input
+                type="number"
+                value={annualInsurance}
+                onChange={(e) => setAnnualInsurance(Number(e.target.value))}
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                min={0}
+                step={100}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Extra Monthly Payment (optional)
+            </label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+              <input
+                type="number"
+                value={extraMonthly}
+                onChange={(e) => setExtraMonthly(Number(e.target.value))}
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                min={0}
+                step={50}
+              />
+            </div>
+          </div>
+          {hasPMI && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                PMI Rate (down payment &lt; 20%)
+              </label>
+              <div className="relative">
+                <input
+                  type="number"
+                  value={pmiRate}
+                  onChange={(e) => setPmiRate(Number(e.target.value))}
+                  className="w-full rounded-lg border border-gray-300 px-4 pr-12 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+                  min={0}
+                  max={3}
+                  step={0.05}
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">%</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Key Result */}
       <div className="bg-blue-600 rounded-xl p-6 text-white text-center">
-        <p className="text-blue-100 text-sm mb-1">Monthly Payment</p>
-        <p className="text-5xl font-bold">${fmt(Math.round(monthlyPayment))}</p>
+        <p className="text-blue-100 text-sm mb-1">Total Monthly Payment (PITI)</p>
+        <p className="text-5xl font-bold">${fmt(Math.round(totalMonthlyPITI))}</p>
         {extraMonthly > 0 && (
           <p className="text-blue-200 text-sm mt-1">
-            + ${fmt(extraMonthly)} extra = ${fmt(Math.round(monthlyPayment + extraMonthly))}/mo
+            + ${fmt(extraMonthly)} extra = ${fmt(Math.round(totalMonthlyPITI + extraMonthly))}/mo
           </p>
         )}
+      </div>
+
+      {/* PITI Breakdown */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <h3 className="font-semibold text-gray-900 mb-4">Monthly Payment Breakdown</h3>
+        <div className="space-y-3">
+          <div className="flex justify-between items-center py-2 border-b border-gray-100">
+            <span className="text-gray-600">Principal &amp; Interest</span>
+            <span className="font-semibold text-gray-900">${fmt(Math.round(monthlyPayment))}</span>
+          </div>
+          <div className="flex justify-between items-center py-2 border-b border-gray-100">
+            <span className="text-gray-600">Property Tax</span>
+            <span className="font-semibold text-gray-900">${fmt(Math.round(monthlyPropertyTax))}</span>
+          </div>
+          <div className="flex justify-between items-center py-2 border-b border-gray-100">
+            <span className="text-gray-600">Homeowners Insurance</span>
+            <span className="font-semibold text-gray-900">${fmt(Math.round(monthlyInsurance))}</span>
+          </div>
+          {hasPMI && (
+            <div className="flex justify-between items-center py-2 border-b border-gray-100">
+              <div>
+                <span className="text-gray-600">PMI</span>
+                <span className="text-xs text-gray-400 ml-2">(drops off at 20% equity)</span>
+              </div>
+              <span className="font-semibold text-gray-900">${fmt(Math.round(monthlyPMI))}</span>
+            </div>
+          )}
+          <div className="flex justify-between items-center py-2 pt-3 border-t-2 border-gray-300">
+            <span className="font-bold text-gray-900">Total Payment</span>
+            <span className="font-bold text-gray-900 text-lg">${fmt(Math.round(totalMonthlyPITI))}</span>
+          </div>
+        </div>
       </div>
 
       {/* Summary Cards */}
@@ -247,6 +376,61 @@ export default function MortgageCalculator() {
           </p>
         </div>
       )}
+
+      {/* 15yr vs 30yr Comparison */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">15-Year vs 30-Year Comparison</h3>
+        <p className="text-sm text-gray-600 mb-6">
+          See how a shorter term affects your monthly payment and total cost using your current inputs.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* 15-Year Card */}
+          <div className="border border-blue-200 bg-blue-50 rounded-lg p-5">
+            <h4 className="font-semibold text-blue-900 text-lg mb-3">15-Year Fixed</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-gray-600 text-sm">Monthly P&amp;I</span>
+                <span className="font-bold text-gray-900">${fmt(Math.round(monthlyPI15))}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600 text-sm">Total Interest</span>
+                <span className="font-bold text-gray-900">${fmt(Math.round(totalInterest15))}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600 text-sm">Total Cost</span>
+                <span className="font-bold text-gray-900">${fmt(Math.round(totalCost15))}</span>
+              </div>
+            </div>
+          </div>
+          {/* 30-Year Card */}
+          <div className="border border-gray-200 bg-gray-50 rounded-lg p-5">
+            <h4 className="font-semibold text-gray-700 text-lg mb-3">30-Year Fixed</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-gray-600 text-sm">Monthly P&amp;I</span>
+                <span className="font-bold text-gray-900">${fmt(Math.round(monthlyPI30))}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600 text-sm">Total Interest</span>
+                <span className="font-bold text-gray-900">${fmt(Math.round(totalInterest30))}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600 text-sm">Total Cost</span>
+                <span className="font-bold text-gray-900">${fmt(Math.round(totalCost30))}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Savings Summary */}
+        <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+          <p className="text-green-900 font-semibold">
+            Choosing 15 years saves you ${fmt(Math.round(interestSavedWith15))} in interest
+          </p>
+          <p className="text-sm text-green-700 mt-1">
+            Monthly payment is ${fmt(Math.round(monthlyPI15 - monthlyPI30))} higher, but you pay off your home 15 years sooner and keep far more of your money.
+          </p>
+        </div>
+      </div>
 
       {/* Amortization Schedule Toggle */}
       <div>
