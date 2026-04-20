@@ -9,6 +9,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lendingcalculator.net"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/favicon.svg",
   },
