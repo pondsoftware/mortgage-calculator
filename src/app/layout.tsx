@@ -44,6 +44,19 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <footer className="bg-white border-t border-gray-200 mt-12">
           <div className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mb-4">
+              <p className="text-sm font-medium text-gray-700 text-center mb-2">More Free Tools</p>
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm">
+                <a href="https://appliancecostcalculator.net" className="text-blue-600 hover:underline">Appliance Cost Calculator</a>
+                <a href="https://sidehustletaxcalculator.net" className="text-blue-600 hover:underline">Side Hustle Tax Calculator</a>
+                <a href="https://imageconverters.net" className="text-blue-600 hover:underline">Image Converter</a>
+                <a href="https://photometadata.net" className="text-blue-600 hover:underline">Photo Metadata Viewer</a>
+                <a href="https://freelancerates.net" className="text-blue-600 hover:underline">Freelance Rate Calculator</a>
+                <a href="https://imageresizers.net" className="text-blue-600 hover:underline">Social Image Resizer</a>
+                <a href="https://compoundinterestcalc.app" className="text-blue-600 hover:underline">Compound Interest Calculator</a>
+                <a href="https://salaryconverter.net" className="text-blue-600 hover:underline">Salary Converter</a>
+              </div>
+            </div>
             <p className="text-sm text-gray-500 text-center">
               This calculator provides estimates for informational purposes
               only. Actual payments may vary based on lender terms, taxes,
