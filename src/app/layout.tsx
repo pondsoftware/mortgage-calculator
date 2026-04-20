@@ -69,6 +69,7 @@ export default function RootLayout({
                 <a href="https://imageresizers.net" className="text-blue-600 hover:underline">Social Image Resizer</a>
                 <a href="https://compoundinterestcalc.app" className="text-blue-600 hover:underline">Compound Interest Calculator</a>
                 <a href="https://salaryconverter.net" className="text-blue-600 hover:underline">Salary Converter</a>
+                <a href="https://printablepolly.com" className="text-blue-600 hover:underline">Printable Polly</a>
               </div>
             </div>
             <p className="text-sm text-gray-500 text-center">
