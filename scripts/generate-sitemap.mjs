@@ -2,7 +2,14 @@ import { writeFileSync } from "fs";
 
 const DOMAIN = "https://lendingcalculator.net";
 
-const urls = ["/"];
+const urls = [
+  "/",
+  "/amortization-schedule",
+  "/refinance",
+  "/affordability",
+  "/rent-vs-buy",
+  "/extra-payments",
+];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
