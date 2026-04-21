@@ -42,8 +42,20 @@ export default function RentVsBuyPage() {
     },
   ];
 
+  const webAppJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Rent vs Buy Calculator",
+    description: "Compare the total cost of renting versus buying a home over time. See the crossover point where buying becomes cheaper, including appreciation, taxes, maintenance, and equity.",
+    url: "https://lendingcalculator.net/rent-vs-buy",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Any",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <div className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">

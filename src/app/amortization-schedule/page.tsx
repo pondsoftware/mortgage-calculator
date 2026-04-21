@@ -42,8 +42,20 @@ export default function AmortizationSchedulePage() {
     },
   ];
 
+  const webAppJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Amortization Schedule Calculator",
+    description: "Generate a complete amortization schedule showing monthly principal, interest, and remaining balance for any mortgage. See exactly how your loan is paid off over time.",
+    url: "https://lendingcalculator.net/amortization-schedule",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Any",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <div className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">

@@ -32,8 +32,20 @@ export default function Home() {
     }
   ];
 
+  const webAppJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Mortgage Payment Calculator",
+    description: "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+    url: "https://lendingcalculator.net",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Any",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <div className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
