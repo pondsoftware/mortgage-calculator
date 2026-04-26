@@ -123,6 +123,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Related Financial Tools */}
+      <section className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Financial Tools</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="https://compoundinterestcalc.app" className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition">
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">Compound Interest Calculator</h3>
+            <p className="text-sm text-gray-600">See how your savings or investments grow over time with compound interest.</p>
+          </a>
+          <a href="https://salaryconverter.net" className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-md transition">
+            <h3 className="font-semibold text-gray-900 group-hover:text-sky-600 transition mb-2">Salary Converter</h3>
+            <p className="text-sm text-gray-600">Convert annual salary to hourly, monthly, or weekly pay. Compare across 180+ countries.</p>
+          </a>
+        </div>
+      </section>
+
       {/* Educational Content */}
       <section className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">How Is a Mortgage Payment Calculated?</h2>
