@@ -16,22 +16,22 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
-  title: "Mortgage Calculator — Monthly Payment, Amortization & Extra Payments",
+  title: "Mortgage Calculator — Payment, Amortization & Payoff",
   description:
-    "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+    "Calculate your mortgage payment, see a full amortization schedule, and find out how much interest you save with extra payments.",
   openGraph: {
-    title: "Mortgage Calculator",
+    title: "Mortgage Calculator — Payment, Amortization & Payoff",
     description:
-      "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+      "Calculate your mortgage payment, see a full amortization schedule, and find out how much interest you save with extra payments.",
     type: "website",
     url: "https://lendingcalculator.net",
     siteName: "Mortgage Calculator",
   },
   twitter: {
     card: "summary",
-    title: "Mortgage Calculator",
+    title: "Mortgage Calculator — Payment, Amortization & Payoff",
     description:
-      "Free mortgage calculator with monthly payment breakdown, full amortization schedule, and extra payment analysis. See exactly how much interest you'll pay over the life of your loan.",
+      "Calculate your mortgage payment, see a full amortization schedule, and find out how much interest you save with extra payments.",
   },
 };
 
